@@ -11,6 +11,8 @@ Name: SSH FS
 
 [VS Marketplace Link](https://marketplace.visualstudio.com/items?itemName=Kelvin.vscode-sshfs)
 
+!!DOWNLOAD the key file that match your NAME!!
+
 # SSH FS config
 ```javascript
 {
