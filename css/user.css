@@ -1,0 +1,59 @@
+.inputs h1{
+    font-style: italic;
+    color: white;
+    text-align: center;
+    text-transform: capitalize;
+    font-weight: 400;
+    
+} 
+
+
+
+
+
+.inputs input[id = "steamid"] {
+    border: 2px solid #5c85d6;
+    display: block;
+    width: 15em;
+    text-align: center;
+    margin-left:500px; 
+    border-radius:2em;
+    height:2em;
+    transition: 0.7s;
+    margin: auto;
+}
+
+.inputs input[id = "steamid"]:focus{
+    width: 25em;
+    border: 2px solid #5c85d6;
+}
+
+button, select{
+      
+    border: 2px solid #5c85d6;
+    padding: 10px 20px;
+    border-radius:12px;
+    text-decoration: none;
+    margin: auto;
+    display: block;
+    margin-top:10px;
+}
+
+button:hover {
+    background-color: rgb(230, 225, 218);
+}
+ 
+.outtext {
+color: white;
+}
+
+#output{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.container{
+    margin-top: 20px;
+    margin-right: 280px;
+    width: 200px;
+}

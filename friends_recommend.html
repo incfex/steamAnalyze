@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+        <head>
+                <link rel="stylesheet" type="text/css" href="css/user.css"> 
+                <script src="src/steam_api.js"></script>
+                <script src = src/friends_recommend.js ></script>
+
+                <script type="text/javascript" src="src/vis.js"></script>
+                <link href="css/vis.css" rel="stylesheet" type="text/css" />
+
+                <style type="text/css">
+                    #mynetwork {
+                        width: 100%;
+                        min-height: 100%;
+                        margin: 0;
+                        height: 100%;
+                    }
+                    html,body {
+                        min-height: 100%;
+                        height: 100%;
+                        margin: 0;
+                    }
+                </style>
+                
+        </head>
+            <body background="css/grey.jpg">
+                <div class="inputs" >
+                    <h1> Friends Recommendation </h1>
+                    <input id="steamid" type="text" placeholder="Please enter your steam ID" ></input>
+                    <select id="channel">
+                        <option value="MutualRows">Mutual Friends</option>
+                        <option value="BetweennessRows">By Betweenness centrality </option>
+                    </select>
+                    <button class="btn" id="run_btn">Recommend</button>
+                </div>
+        <div id="mynetwork"></div>
+            <pre id="output"></pre>
+        
+        <script type="text/javascript" src = src/friends_recommend2.js></script>
+    </body>
+
+</html>

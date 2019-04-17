@@ -29,3 +29,6 @@ The project locates at `~/Librorum/steamAPI`
 
 # API config
 API key and domain for steam api is stored in the `./common/key.json`
+
+# website
+http://ny.kuroa.me/steamAPI/(filename)

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<script src="common/key.js"></script>
+<script src="src/steam_api.js"></script>
+<script src="src/store_api.js"></script>
+<script src="src/get_owned_games.js"></script>
+<script src="src/fetch_popular_bytag.js"></script>
+<script src="src/feng.js"></script>
+<script src="src/get_game_tags.js"></script>
+<script src="src/get_tags_mins.js"></script>
+<html>
+
+<body>
+    <div>
+        Steam ID: <input id="steamid" type="text"></input>
+        Channels: <select id="channel">
+            <option value="NewReleasesRows">New and Trending</option>
+            <option value="TopSellersRows">Top Selling</option>
+            <option value="ConcurrentUsersRows">What's Popular</option>
+            <option value="ComingSoonRows">Upcoming</option>
+        </select>
+        <button id="run_btn">GO!!!!!!</button>
+        <pre id="output"></pre>
+    </div>
+</body>
+<script>
+
+    var out = document.getElementById("output");
+    var channel = document.getElementById("channel");
+
+    var steam_api = new SteamAPI(key);
+
+    var userId = document.getElementById("steamid");
+    var run_btn = document.getElementById("run_btn");
+
+    function process(tags) {
+        alert("I am in!");
+        console.log(tags);
+        console.log(JSON.stringify(tags));
+        for (var key in tags) {
+            alert(key);
+            tagList.push({ tag: key, mins: tags[key] });
+        }
+    }
+
+    async function suggest(userId) {
+        var profile = await getProfile(steam_api, userId);
+        console.log(profile);
+        var tags = await get_tags_mins(profile.response.games);
+        var tagList = [];
+
+        for (var key in tags) {
+            tagList.push({ tag: key, mins: tags[key] });
+        }
+        var sortedTags = tagList.sort((a, b) => b.mins - a.mins);
+        for (var i = 0; i < 10; i++) {
+            var tag = sortedTags[i].tag;
+            var popular_games = await fetch_popular_bytag(tag, channel.value);
+            var unowned = popular_games.filter(game => {
+                return !profile.response.games.some(_game => _game.appid == game.appid);
+            });
+            console.log(tag, unowned);
+            var cat_title = document.createElement('h2');
+            cat_title.innerText = tag;
+            out.appendChild(cat_title);
+            var container = document.createElement('div');
+            unowned.forEach(game => {
+                var link = document.createElement("a");
+                var image = document.createElement("img");
+                image.src = game.img;
+                link.href = `https://store.steampowered.com/app/${game.appid}`;
+                console.log(image, game.img);
+                link.appendChild(image);
+                container.appendChild(link);
+            });
+            out.appendChild(container);
+        }
+    }
+    run_btn.onclick = () => suggest(userId.value);
+</script>
+
+</html>

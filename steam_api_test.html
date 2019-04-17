@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="src/steam_api.js"></script>
+</head>
+
+<body>
+    <div id="inputs">
+        API category: <select id="cat">
+            <option value="ISteamNews">ISteamNews</option>
+            <option value="ISteamUserStats">ISteamUserStats</option>
+            <option value="ISteamUser">ISteamUser</option>
+        </select>
+        API method: <input id="method" type="text"></input>
+        API version: <select id="ver">
+            <option value="v0001">v0001</option>
+            <option value="v0002">v0002</option>
+        </select><br>
+        Payload: <br>
+        <textarea id="payload" autocomplete="off" autocorrect="off" autocapitalize="off"
+            spellcheck="false"></textarea><br>
+        <button id="run_btn">Run</button>
+    </div>
+    <div>
+        <pre id="output"></pre>
+    </div>
+</body>
+<script>
+    var steam_api = new SteamAPI('12270FC6A72424DAF652F14E9B06FB8F');
+    var cat = document.getElementById('cat');
+    var method = document.getElementById('method');
+    var ver = document.getElementById('ver');
+    var out = document.getElementById('output');
+    var payload = document.getElementById('payload');
+    var run_btn = document.getElementById('run_btn');
+
+    run_btn.onclick = async () => {
+        var respond = await steam_api(cat.value, method.value, ver.value, JSON.parse(payload.value));
+        out.innerText = JSON.stringify(respond);
+    };
+
+</script>
+
+</html>
