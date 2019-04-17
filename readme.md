@@ -14,13 +14,12 @@ Name: SSH FS
 # SSH FS config
 ```javascript
 {
-    "label": "nj.vultr",
-    "root": "~/Librorum/steamAPI",
-    "host": "ny.kuroa.me",
+    "label": "goo.kuroa.me",
+    "root": "~/Librorum/steamAnalyze",
+    "host": "34.73.179.109",
     "port": 22,
     "username": "incfex",
-    "password": "Bushimima",
-    "name": "nj"
+    "name": "cis454"
 }
 ```
 
