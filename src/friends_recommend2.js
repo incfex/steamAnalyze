@@ -10,6 +10,7 @@ run_btn.onclick = async () => {
     var graph = new vis.Network(container, {nodes, edges}, {
         nodes: {
             borderWidth: 1,
+            borderWidthSelected: 20,
             size: 30,
             color: {
                 border: '#333'
