@@ -54,6 +54,10 @@ run_btn.onclick = async () => {
                 check.push(e.nodes[0]);
                 await AddNodeEdge(steam_api, check[0],nodes, edges,addNode,addEdge,visited);
                 await AddNodeEdge(steam_api, check[1],nodes, edges,addNode,addEdge,visited);
+                var array0 = graph.getConnectedNodes(check[0]);
+                var array1 = graph.getConnectedNodes(check[1]);
+                var mutual = array0.filter(x => array1.includes(x));
+                graph.setSelection({nodes:mutual},{unselectAll: true, highlightEdges: false});
             }
             else{
                 check.push(e.nodes[0]);
