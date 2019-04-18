@@ -3,7 +3,6 @@ var steam_id = document.getElementById('steamid'); //76561198085623983
 var out = document.getElementById('output');
 var run_btn = document.getElementById('run_btn');
 run_btn.onclick = async () => {
-    //alert('clicked');
     var container = document.getElementById('mynetwork');
     var nodes = new vis.DataSet();
     var edges = new vis.DataSet();
@@ -44,6 +43,7 @@ run_btn.onclick = async () => {
     }
     
     var visited = [];
+    steam_id.value = await username_reslove(steam_api, steam_id.value);
     var output1 = await GetPlayerSummaries(steam_api, steam_id.value);
     addNode(output1.response.players[0].steamid, output1.response.players[0].personaname, output1.response.players[0].avatarfull, nodes);
     visited.push(steam_id.value);
