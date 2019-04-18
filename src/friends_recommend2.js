@@ -19,6 +19,11 @@ run_btn.onclick = async () => {
                 useBorderWithImage: true
             }
         },
+        edges:{
+            color: {
+                color: '#ffffff'
+            },
+        },
         physics: {
             solver: 'repulsion',
             repulsion: {
