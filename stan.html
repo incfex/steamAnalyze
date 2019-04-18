@@ -24,6 +24,7 @@
             var run_btn = document.getElementById('run_btn');
             run_btn.onclick = async () => {
                 out.innerText = '';
+                steam_id.value = await username_reslove(steam_api, steam_id.value);
                 var output = await getProfile(steam_api, steam_id.value);
                 console.log("output", output);
                 for (var i = 0; i < output.response.games.length; i++) {

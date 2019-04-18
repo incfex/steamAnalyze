@@ -44,6 +44,7 @@
     }
 
     async function suggest(userId) {
+        userId.value = await username_reslove(steam_api, userId.value);
         var profile = await getProfile(steam_api, userId);
         console.log(profile);
         var tags = await get_tags_mins(profile.response.games);
@@ -76,6 +77,7 @@
             out.appendChild(container);
         }
     }
+    
     run_btn.onclick = () => suggest(userId.value);
 </script>
 
