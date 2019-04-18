@@ -114,12 +114,13 @@
     <script>
         var query = document.getElementById('query');
         var loading = document.getElementById('loading_warp');
+        var graphs = [];
 
         var draw = async function (user) {
             var api = new SteamAPI('12270FC6A72424DAF652F14E9B06FB8F');
             var steam_id = await username_reslove(api, user);
             var result = await stat_game_tags(api, steam_id);
-            console.log(JSON.stringify(result));
+            //console.log(JSON.stringify(result));
 
             Chart.defaults.global.legend.display = false;
 
@@ -139,6 +140,7 @@
                     }]
                 }
             });
+            graphs.push(g_tag_min);
 
             var c_games_pie = document.getElementById('c_games_pie');
             var d_games_pie = result.profile.response.games;
@@ -156,14 +158,24 @@
                     }],
                 }
             });
+            graphs.push(g_games_pie);
         };
+        
 
         query.addEventListener('keydown', async e => {
             if (e.keyCode == 13) {
                 e.preventDefault();
                 loading.className = '';
                 query.disabled = true;
-                await draw(query.value);
+                while (graphs.length > 0) {
+                    graphs.pop().destroy();
+                }
+                try {
+                    await draw(query.value);
+                } catch (e) {
+                    alert (e);
+                }
+                
                 query.disabled = false;
                 loading.className = 'hide';
             }
