@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <script src="common/key.js"></script>
         <script src="src/steam_api.js"></script>
         <script src="src/store_api.js"></script>
         <script src="src/get_game_tags.js"></script>
@@ -117,7 +118,7 @@
         var graphs = [];
 
         var draw = async function (user) {
-            var api = new SteamAPI('12270FC6A72424DAF652F14E9B06FB8F');
+            var api = new SteamAPI(api_keys);
             var steam_id = await username_reslove(api, user);
             var result = await stat_game_tags(api, steam_id);
             //console.log(JSON.stringify(result));
