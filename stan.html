@@ -4,6 +4,7 @@
 <head>
         <head>
                 <link rel="stylesheet" type="text/css" href="css/user.css"> 
+                <script src="common/key.js"></script>
                 <script src="src/steam_api.js"></script>
                 <script src = src/get_owned_games.js ></script>
                 <script src="src/username_reslove.js"></script>
@@ -18,7 +19,7 @@
             <pre id="output"></pre>
         </div>
         <script>
-            var steam_api = new SteamAPI('12270FC6A72424DAF652F14E9B06FB8F');
+            var steam_api = new SteamAPI(api_keys);
             var steam_id = document.getElementById('steamid'); //76561198085623983
             var out = document.getElementById('output');
             var run_btn = document.getElementById('run_btn');

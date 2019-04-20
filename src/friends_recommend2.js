@@ -1,4 +1,4 @@
-var steam_api = new SteamAPI('12270FC6A72424DAF652F14E9B06FB8F');
+var steam_api = new SteamAPI(api_keys);
 var steam_id = document.getElementById('steamid'); //76561198085623983
 var out = document.getElementById('output');
 var run_btn = document.getElementById('run_btn');
