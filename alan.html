@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script src="src/get_reviews.js"></script>
+      <script src="src/steampowered_api.js"></script>
+      <script src="common/key.js"></script>
+
+  </head>
+  <body>
+    <div class = "all">
+      <h2>Show Game Reviews</h2>
+      Application ID: <input id="AppID" type="text"></input>
+      Application Name: <input name="AppName" type="text"></input>
+      Search either by ID or Name: <select id="choice">
+        <option value="ID">By App ID</option>
+        <option value="Name">By App Name</option>
+      </select> 
+      <button class="btn" id="review_btn" >Show me reviews</button>
+      
+    </div>
+
+
+  
+
+<p id="info"></p>
+
+<script>
+  var steam_api = steampowered_api(api_keys);
+  var app_id = document.getElementById('');
+  var review_btn = document.getElementById('review_btn');
+  review_btn.onclick = async () => {
+
+  }
+  
+</script>
+
+</body>
+</html>
