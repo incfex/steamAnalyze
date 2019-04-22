@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="css/suggestion.css">
 <script src="common/key.js"></script>
 <script src="src/steam_api.js"></script>
 <script src="src/store_api.js"></script>
@@ -11,16 +12,22 @@
 <html>
 
 <body>
-    <div>
+    <h1>Game Suggestion Page </h1>
+    <div clss ="main">
+    <div class="input">
         Steam ID: <input id="steamid" type="text"></input>
+    </div>    
+    <div class="select"> 
         Channels: <select id="channel">
             <option value="NewReleasesRows">New and Trending</option>
             <option value="TopSellersRows">Top Selling</option>
             <option value="ConcurrentUsersRows">What's Popular</option>
             <option value="ComingSoonRows">Upcoming</option>
         </select>
-        <button id="run_btn">GO!!!!!!</button>
+        <button id="run_btn">GO</button>
+    </div>   
         <pre id="output"></pre>
+    
     </div>
 </body>
 <script>
