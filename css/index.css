@@ -1,0 +1,49 @@
+
+
+h1{
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    text-transform: capitalize;
+    font-weight: 400px;
+    margin-left:13px;
+} 
+
+a
+{
+    width:250px;
+    margin:0 15px;
+   
+}
+
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 300px;
+   
+}
+ 
+li a {
+    display: block;
+    color: white;
+    padding: 8px 0px;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight:  100;
+}
+
+.nav a span{
+    display:inline-block;
+    width:0px;
+    height:2px;
+    background:white;
+ }
+
+
+
+.nav a:hover span{
+        width:80%;
+    }
