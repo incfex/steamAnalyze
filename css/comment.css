@@ -1,0 +1,84 @@
+body{
+ background-color: grey;
+ color:white;
+ font-family: Arial, Helvetica, sans-serif;
+}
+
+.all input[id = "AppID"]{
+ border-radius:2em;
+ height:1.5em;
+ margin-right: 20px;
+}
+
+.all input[id = "AppName"]{
+ border-radius:2em;
+ height:1.5em;
+ margin-right: 20px;
+}
+
+#choice{
+ color:white;
+ background:transparent;
+ width:100px;
+ padding:10px;
+ border:none;
+ height:20px;
+ font-family: Arial, Helvetica, sans-serif;
+}
+
+button{
+ margin-left:25px;
+ background:transparent;
+ border-radius:2em;
+ color:white;
+ height:25px;
+ font-weight: 30;
+ font-family: Arial, Helvetica, sans-serif;
+}
+
+#stats{
+ margin-top: 60px;
+ margin-bottom: 30px;
+}
+
+#stats > appname {
+ display:block;
+ margin-bottom: 10px;
+ line-height: 28px;
+}
+
+#stats > div_score {
+ display:block;
+ margin-bottom: 10px;
+}
+
+#stats > div_totalreviews {
+ display:block;
+ margin-bottom: 10px;
+}
+
+#stats > div_totalpositive {
+ display:block;
+ margin-bottom: 10px;
+}
+
+#stats > div_totalnegative {
+ display:block;
+ margin-bottom: 10px;
+}
+
+#stats > div_desc {
+ display:block;
+ margin-bottom: 10px;
+}
+
+
+
+#startStr{
+ font-size: 20px;
+}
+
+#reviews > span{
+ display:block;
+ margin-top:40px;
+}

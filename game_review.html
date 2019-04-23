@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+      <link rel="stylesheet" type="text/css" href="css/comment.css"> 
       <script src="src/get_reviews.js"></script>
       <script src="src/steampowered_api.js"></script>
       <script src="common/key.js"></script>
@@ -61,7 +62,7 @@
             apps.forEach(function(app) {
               if (app.appid==app_id) {
                 var appName = createNode('appName');
-                appName.innerHTML = `App Name: ${app.name} <br>\n`;
+                appName.innerHTML = `App Name: ${app.name} <br>\n App ID: ${app.appid} <br>\n`;
                 append(ul,appName);
               }
               /*
@@ -146,7 +147,7 @@
               if (app.name==app_name) {
                 app_id = app.appid;
                 var appID = createNode('appID');
-                appID.innerHTML = `App ID: ${app.appid} <br>\n`;
+                appID.innerHTML = `App Name: ${app.name} <br>\n App ID: ${app.appid} <br>\n`;
                 append(ul,appID);
               }
               /*
@@ -182,22 +183,24 @@
   
       .then(response => response.json())
       .then(function(data) {
-          console.log(data);
-          var stat_reviewScore = createNode('div_score');
-          stat_reviewScore.innerText = `Review Score: ${data.query_summary.review_score} \n`;
-          append(ul, stat_reviewScore);
-          var total_reviews = createNode('div_totalReviews');
-          total_reviews.innerText = `Total Reviews: ${data.query_summary.total_reviews} \n`;
-          append(ul, total_reviews);
-          var total_positive = createNode('div_totalPositive');
-          total_positive.innerText = `Total Positive Reviews: ${data.query_summary.total_positive} \n`;
-          append(ul, total_positive);
-          var total_negative = createNode('div_totalNegative');
-          total_negative.innerText = `Total Negative Reviews: ${data.query_summary.total_negative} \n`;
-          append(ul, total_negative);
-          var stat_reviewDescription = createNode('div_desc');
-          stat_reviewDescription.innerText = `Review Description: ${data.query_summary.review_score_desc} \n`;
-          append(ul, stat_reviewDescription);
+        console.log(data);
+            var stat_reviewScore = createNode('div_score');
+            stat_reviewScore.innerText = `Review Score: ${data.query_summary.review_score} out of 10 \n`;
+            append(ul, stat_reviewScore);
+            var total_reviews = createNode('div_totalReviews');
+            total_reviews.innerText = `Total Reviews: ${data.query_summary.total_reviews} \n`;
+            append(ul, total_reviews);
+            var total_positive = createNode('div_totalPositive');
+            var percentage_P = ((data.query_summary.total_positive/data.query_summary.total_reviews)*100).toFixed(2);
+            total_positive.innerText = `Total Positive Reviews: ${data.query_summary.total_positive} (${percentage_P}%) \n`;
+            append(ul, total_positive);
+            var total_negative = createNode('div_totalNegative');
+            var percentage_N = ((data.query_summary.total_negative/data.query_summary.total_reviews)*100).toFixed(2);
+            total_negative.innerText = `Total Negative Reviews: ${data.query_summary.total_negative} (${percentage_N}%) \n`;
+            append(ul, total_negative);
+            var stat_reviewDescription = createNode('div_desc');
+            stat_reviewDescription.innerText = `Review Description: ${data.query_summary.review_score_desc} \n`;
+            append(ul, stat_reviewDescription);
           /*
           var start_reviews = createNode('div_startReviews');
           start_reviews.innerText = `The most recent twenty reviews about this game: \n` ;
