@@ -11,16 +11,15 @@ Name: SSH FS
 
 [VS Marketplace Link](https://marketplace.visualstudio.com/items?itemName=Kelvin.vscode-sshfs)
 
-!!DOWNLOAD the key file that match your NAME!!
 
 # SSH FS config
 ```javascript
 {
     "label": "goo.kuroa.me",
     "root": "~/Librorum/steamAnalyze",
-    "host": "34.73.179.109",
+    "host": "goo.kuroa.me",
     "port": 22,
-    "username": "incfex",
+    "username": "",
     "name": "cis454"
 }
 ```
