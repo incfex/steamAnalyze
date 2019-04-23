@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script src="src/get_reviews.js"></script>
+      <script src="src/steampowered_api.js"></script>
+      <script src="common/key.js"></script>
+
+    </head>
+    <body>
+      <div class = "all">
+        <h2>Show Game Reviews</h2>
+        Application ID: <input id="AppID" type="text"></input>
+        Application Name: <input id="AppName" type="text"></input>
+        Search either by ID or Name: <select id="choice">
+          <option value="ID">By App ID</option>
+          <option value="Name">By App Name</option>
+        </select> 
+        <button class="btn" id="review_btn" >Show me reviews!</button>
+        <p id="stats"></p>
+        <p id="startStr" style="text-align:center;"><br></p>
+        <p id="reviews"></p>
+      </div>
+      
+  
+  <script>
+  
+    //var steam_api = steampowered_api(api_keys);
+    //var app_id = document.getElementById('AppID').value;
+    var review_btn = document.getElementById('review_btn');
+    
+    function createNode(element) {
+      return document.createElement(element);
+    }
+  
+    function append(parent, el) {
+      return parent.appendChild(el);
+    }
+    review_btn.onclick = async () => {
+  
+      var obj = document.getElementById("choice");
+      var choice = obj.options[obj.selectedIndex].value;
+      if (choice == 'ID') {
+        var app_id = document.getElementById('AppID').value;
+        console.log(`id:${app_id}`);
+  
+        const proxyurl1 = "https://cors-anywhere.herokuapp.com/";
+        const api = "https://api.steampowered.com/ISteamApps/GetAppList/v0002/";
+  
+        var count = 1;
+  
+        const ul = document.getElementById('stats');
+        const ul_review = document.getElementById('reviews');
+        ul.innerHTML = '';
+        ul_review.innerHTML = '';
+        //const app_id = 730;
+        await fetch(proxyurl1+api)
+        .then(response => response.json())
+        .then(function(data) {
+            console.log(data);
+            let apps = data.applist.apps;
+            apps.forEach(function(app) {
+              if (app.appid==app_id) {
+                var appName = createNode('appName');
+                appName.innerHTML = `App Name: ${app.name} <br>\n`;
+                append(ul,appName);
+              }
+              /*
+              else {
+                alert("Please double check your input!");
+              }
+              */
+            })
+        })
+        
+        const a_key = "E21C49139E2E4803D1D1D8F1FE679038"
+        const proxyurl = "https://cors-anywhere.herokuapp.com/";
+        const url = `https://store.steampowered.com/appreviews/${app_id}?key=${a_key}&json=1`;
+        //const url = "https://store.steampowered.com/appreviews/730?key=E21C49139E2E4803D1D1D8F1FE679038&json=1";
+        fetch(proxyurl + url) // https://cors-anywhere.herokuapp.com/https://example.com
+  
+        .then(response => response.json())
+        .then(function(data) {
+            console.log(data);
+            var stat_reviewScore = createNode('div_score');
+            stat_reviewScore.innerText = `Review Score: ${data.query_summary.review_score} out of 10 \n`;
+            append(ul, stat_reviewScore);
+            var total_reviews = createNode('div_totalReviews');
+            total_reviews.innerText = `Total Reviews: ${data.query_summary.total_reviews} \n`;
+            append(ul, total_reviews);
+            var total_positive = createNode('div_totalPositive');
+            var percentage_P = ((data.query_summary.total_positive/data.query_summary.total_reviews)*100).toFixed(2);
+            total_positive.innerText = `Total Positive Reviews: ${data.query_summary.total_positive} (${percentage_P}%) \n`;
+            append(ul, total_positive);
+            var total_negative = createNode('div_totalNegative');
+            var percentage_N = ((data.query_summary.total_negative/data.query_summary.total_reviews)*100).toFixed(2);
+            total_negative.innerText = `Total Negative Reviews: ${data.query_summary.total_negative} (${percentage_N}%) \n`;
+            append(ul, total_negative);
+            var stat_reviewDescription = createNode('div_desc');
+            stat_reviewDescription.innerText = `Review Description: ${data.query_summary.review_score_desc} \n`;
+            append(ul, stat_reviewDescription);
+            /*
+            var start_reviews = createNode('div_startReviews');
+            start_reviews.innerText = `The most recent twenty reviews about this game: \n` ;
+            append(ul, start_reviews);
+            */
+            var startStr = document.getElementById('startStr');
+            startStr.innerText = 'The most recent reviews about this game: \n'
+            let reviews = data.reviews;
+            reviews.forEach(function(review) {
+              //let li = createNode('li'),
+              var span = createNode('span');
+            // console.log(authors.response.games.name);
+              //span.innerHTML = `${game.name}`.concat("<br>");
+              span.innerHTML = `No.${count}: ${review.review} <br>`;
+              count++;
+              append(ul_review, span);
+            })
+          })
+  
+        .catch(function(error) {
+            console.log(error);
+          });
+        }
+  
+      else if (choice == 'Name') {
+        var app_name = document.getElementById('AppName').value;
+        console.log(`id:${app_name}`);
+  
+        const proxyurl1 = "https://cors-anywhere.herokuapp.com/";
+        const api = "https://api.steampowered.com/ISteamApps/GetAppList/v0002/";
+  
+        var count = 1;
+        
+        const ul = document.getElementById('stats');
+        const ul_review = document.getElementById('reviews');
+        ul.innerHTML = '';
+        ul_review.innerHTML = '';
+        //const app_id = 730;
+        var app_id = 0;
+        await fetch(proxyurl1+api)
+        .then(response => response.json())
+        .then(function(data) {
+            console.log(data);
+            let apps = data.applist.apps;
+            apps.forEach(function(app) {
+              if (app.name==app_name) {
+                app_id = app.appid;
+                var appID = createNode('appID');
+                appID.innerHTML = `App ID: ${app.appid} <br>\n`;
+                append(ul,appID);
+              }
+              /*
+              else {
+                alert("Please double check your input!");
+              }
+              */
+            })
+        })
+  
+      //const app_id = 730;
+      const a_key = "E21C49139E2E4803D1D1D8F1FE679038"
+      const proxyurl = "https://cors-anywhere.herokuapp.com/";
+      const url = `https://store.steampowered.com/appreviews/${app_id}?key=${a_key}&json=1`;
+      //const url = "https://store.steampowered.com/appreviews/730?key=E21C49139E2E4803D1D1D8F1FE679038&json=1";
+      fetch(proxyurl + url) // https://cors-anywhere.herokuapp.com/https://example.com
+  
+      /*
+      .then(response => response.json())
+      .then(function(data) {
+          console.log(data);
+          let games = data.response.games;
+          return games.forEach(function(game) {
+            //let li = createNode('li'),
+            var span = createNode('span');
+          // console.log(authors.response.games.name);
+            //span.innerHTML = `${game.name}`.concat("<br>");
+            span.innerHTML = `${game.name} <br>`;
+            append(ul, span);
+          })
+        })
+      */
+  
+      .then(response => response.json())
+      .then(function(data) {
+          console.log(data);
+          var stat_reviewScore = createNode('div_score');
+          stat_reviewScore.innerText = `Review Score: ${data.query_summary.review_score} \n`;
+          append(ul, stat_reviewScore);
+          var total_reviews = createNode('div_totalReviews');
+          total_reviews.innerText = `Total Reviews: ${data.query_summary.total_reviews} \n`;
+          append(ul, total_reviews);
+          var total_positive = createNode('div_totalPositive');
+          total_positive.innerText = `Total Positive Reviews: ${data.query_summary.total_positive} \n`;
+          append(ul, total_positive);
+          var total_negative = createNode('div_totalNegative');
+          total_negative.innerText = `Total Negative Reviews: ${data.query_summary.total_negative} \n`;
+          append(ul, total_negative);
+          var stat_reviewDescription = createNode('div_desc');
+          stat_reviewDescription.innerText = `Review Description: ${data.query_summary.review_score_desc} \n`;
+          append(ul, stat_reviewDescription);
+          /*
+          var start_reviews = createNode('div_startReviews');
+          start_reviews.innerText = `The most recent twenty reviews about this game: \n` ;
+          append(ul, start_reviews);
+          */
+          var startStr = document.getElementById('startStr');
+          startStr.innerText = 'The most recent reviews about this game: \n'
+          let reviews = data.reviews;
+          reviews.forEach(function(review) {
+            //let li = createNode('li'),
+            var span = createNode('span');
+          // console.log(authors.response.games.name);
+            //span.innerHTML = `${game.name}`.concat("<br>");
+            span.innerHTML = `No.${count}: ${review.review} <br>`;
+            count++;
+            append(ul_review, span);
+          })
+        })
+  
+      .catch(function(error) {
+          console.log(error);
+        });
+      }
+  
+        }
+    
+  </script>
+  
+  </body>
+  </html>
+  
