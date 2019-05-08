@@ -117,6 +117,7 @@
         var loading = document.getElementById('loading_warp');
         var graphs = [];
 
+        // main draw logic
         var draw = async function (user) {
             var api = new SteamAPI(api_keys);
             var steam_id = await username_reslove(api, user);
@@ -125,15 +126,20 @@
 
             Chart.defaults.global.legend.display = false;
 
+            // get graph container
             var c_tag_min = document.getElementById('c_tag_min');
+
+            // sort and transform result to array
             var d_tag_min = Object.keys(result.tags).map(k => {return {tag: k, time: result.tags[k]}}).sort((a, b) => b.time - a.time);
+
+            // draw the graph
             var g_tag_min = new Chart(c_tag_min, {
                 type: 'horizontalBar',
                 data: {
-                    labels: d_tag_min.map(d => d.tag),
+                    labels: d_tag_min.map(d => d.tag), // use game tags as label, 
                     datasets: [{
                         label: 'Minute Played',
-                        data: d_tag_min.map(d => d.time),
+                        data: d_tag_min.map(d => d.time), // and game time as data.
                         backgroundColor: randomColor({
                             count: d_tag_min.length,
                             luminosity: 'light'
@@ -141,17 +147,22 @@
                     }]
                 }
             });
+
+            // keep track of graphs, in case we need to destroy them
             graphs.push(g_tag_min);
 
+            // get graph container
             var c_games_pie = document.getElementById('c_games_pie');
             var d_games_pie = result.profile.response.games;
+
+            // draw the graph
             var g_games_pie = new Chart(c_games_pie, {
                 type: 'doughnut',
                 data: {
-                    labels: d_games_pie.map(e => e.name),
+                    labels: d_games_pie.map(e => e.name), // use game name as label,
                     datasets: [{
                         label: 'Minute Played',
-                        data: d_games_pie.map(e => e.playtime_forever),
+                        data: d_games_pie.map(e => e.playtime_forever), // amd game time as data.
                         backgroundColor: randomColor({
                             count: d_games_pie.length,
                             luminosity: 'light'
@@ -159,26 +170,27 @@
                     }],
                 }
             });
+            // keep track of graphs, in case we need to destroy them
             graphs.push(g_games_pie);
         };
         
 
         query.addEventListener('keydown', async e => {
-            if (e.keyCode == 13) {
+            if (e.keyCode == 13) { // if enter pressed
                 e.preventDefault();
-                loading.className = '';
-                query.disabled = true;
+                loading.className = ''; // show the loading mask
+                query.disabled = true; // disable the input
                 while (graphs.length > 0) {
-                    graphs.pop().destroy();
+                    graphs.pop().destroy(); // distroy old graphs
                 }
                 try {
-                    await draw(query.value);
+                    await draw(query.value); // do the drawings
                 } catch (e) {
-                    alert (e);
+                    alert (e); // if error, alert.
                 }
                 
-                query.disabled = false;
-                loading.className = 'hide';
+                query.disabled = false; // re-enable input
+                loading.className = 'hide'; // drawing logic end, remove the mask
             }
         });
     </script>
