@@ -1,34 +1,9 @@
-# General
-All changes made in the server can be checked real-time after saving by visiting [CIS400](ny.kuroa.me/steamAPI)
-
-Edit the project files by installing the below vs code plugin, config the plugin, then connect it as workspace folder.
 
 # Reference
 [Steam API](https://steamcommunity.com/dev)
 
-# Visual Studio Plugin
-Name: SSH FS
-
-[VS Marketplace Link](https://marketplace.visualstudio.com/items?itemName=Kelvin.vscode-sshfs)
-
-
-# SSH FS config
-```javascript
-{
-    "label": "goo.kuroa.me",
-    "root": "~/Librorum/steamAnalyze",
-    "host": "goo.kuroa.me",
-    "port": 22,
-    "username": "",
-    "name": "cis454"
-}
-```
-
-# Project Location
-The project locates at `~/Librorum/steamAPI`
-
-# API config
-API key and domain for steam api is stored in the `./common/key.json`
+# How to access website
+It is available online, so you can just type the URL directly.
 
 # website
-http://ny.kuroa.me/steamAPI/(filename)
+http://ny.kuroa.me/(filename)
